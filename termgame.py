@@ -1,16 +1,17 @@
-#/usr/bin/env python3
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 import argparse
+import curses
 from debug import Debug
-from slowprint import *
+from presentation import present
 
 def main(args):
     debug = Debug(args.debug)
     debug.out("No args except debug.")
-    type('¿No lo notas?.')
-    sigh(3)
-    type('Simplemente, algo no va bien, pero no sé muy bien qué ocurre.')
+    present()
+
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
