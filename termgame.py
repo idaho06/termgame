@@ -2,15 +2,21 @@
 # -*- coding: utf-8 -*-
 
 import argparse
-import curses
-from debug import Debug
-from presentation import present
+# import curses
+
+from res.debug import Debug
+from scenes import scenesdict, firstscene
+
 
 def main(args):
     debug = Debug(args.debug)
     debug.out("No args except debug.")
-    present()
 
+    currentscene = scenesdict[firstscene]
+    nextscene = currentscene.run()
+    while nextscene != 'scene.end':
+        currentscene = scenesdict[nextscene]
+        nextscene = currentscene.run()
 
 
 if __name__ == "__main__":
