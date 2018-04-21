@@ -14,5 +14,5 @@ sceneslist = ['scenes.presentation']
 scenesdict = {}
 firstscene = 'scenes.presentation'
 
-for s in sceneslist:
-    scenesdict[s] = importlib.import_module(s)
+for scene in sceneslist:
+    scenesdict[scene] = importlib.import_module(scene)

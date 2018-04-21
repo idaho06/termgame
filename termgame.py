@@ -2,15 +2,12 @@
 # -*- coding: utf-8 -*-
 
 import argparse
-# import curses
-
-from res.debug import Debug
+import logging
 from scenes import scenesdict, firstscene
 
 
-def main(args):
-    debug = Debug(args.debug)
-    debug.out("No args except debug.")
+def main():
+    logging.debug("Entering Main function.")
 
     currentscene = scenesdict[firstscene]
     nextscene = currentscene.run()
@@ -18,10 +15,34 @@ def main(args):
         currentscene = scenesdict[nextscene]
         nextscene = currentscene.run()
 
+    return 0
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(description="Small terminal interactive program.",
+                                     epilog="Made by César (Idaho06) Rodríguez Moreno.")
     # parser.add_argument("echo", help="echo the string you use here")
-    parser.add_argument("-d", "--debug", help="Print debug info.", action="store_true")
+    parser.add_argument("-d", "--debug", help="Debug level: DEBUG, INFO, WARNING, ERROR or CRITICAL", default="WARNING")
+    parser.add_argument("-o", "--erroroutput", help="File of error output. Default is stderr.", default="stderr")
     args = parser.parse_args()
-    main(args)
+
+    loglevel = logging.WARNING
+    logoutput = None
+
+    if args.debug == "DEBUG":
+        loglevel = logging.DEBUG
+    if args.debug == "INFO":
+        loglevel = logging.INFO
+    if args.debug == "ERROR":
+        loglevel = logging.ERROR
+    if args.debug == "CRITICAL":
+        loglevel = logging.CRITICAL
+
+    if args.erroroutput != "stderr":
+        logoutput = args.erroroutput
+
+    logging.basicConfig(level=loglevel, filename=logoutput,
+                        format="%(asctime)s %(levelname)s: %(funcName)s: %(message)s")
+
+    logging.info("Debug set to %s." % loglevel)
+
+    exit(main())
