@@ -1,6 +1,5 @@
 import importlib
-import os
-
+import logging
 
 class Scene:
     def __init__(self):
@@ -10,9 +9,12 @@ class Scene:
         pass
 
 
-sceneslist = ['scenes.presentation']
+logging.debug("Importing scenes.")
+
+sceneslist = ['scenes.presentation', 'scenes.login']
 scenesdict = {}
-firstscene = 'scenes.presentation'
+firstscene = 'scenes.login'
 
 for scene in sceneslist:
+    logging.debug("Importing scene: %s" % scene)
     scenesdict[scene] = importlib.import_module(scene)
