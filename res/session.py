@@ -29,6 +29,9 @@ if entries_in_table_version == 0:
             major=config.database_version_major,
             minor=config.database_version_minor))
     conn.commit()
+    logging.warning("We assume ddbb is new, so we create all needed tables here.")
+    # TODO: create all needed tables
+
 elif entries_in_table_version == 1:
     logging.info("One entry found in table `termgame_version`.")
     c.execute("SELECT `major`, `minor` FROM `termgame_version`;")
