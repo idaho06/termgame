@@ -10,6 +10,8 @@ except NameError:
 
 logging.info("Opening connection to database %s", config.database_file)
 conn = sqlite3.connect(config.database_file)
+is_ddbb_open = True
+
 c = conn.cursor()
 logging.debug("cursor created is %s", c)
 
@@ -49,3 +51,4 @@ elif entries_in_table_version > 1:
     )
 
 conn.close()
+is_ddbb_open = False
