@@ -16,6 +16,7 @@ class TestSession(unittest.TestCase):
     def tearDown(self):
         try:
             os.remove(config.database_file)
+            print("tearDown: Database %s has been deleted" % config.database_file)
         except:
             print("tearDown: Database %s already deleted" % config.database_file)
 
@@ -23,3 +24,4 @@ class TestSession(unittest.TestCase):
         from res import session
         self.assertEqual(1, session.__session__)
         self.assertEqual(False, session.is_ddbb_open)
+        self.assertEqual(False, session.is_user_logged)

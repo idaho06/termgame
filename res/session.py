@@ -34,6 +34,7 @@ if entries_in_table_version == 0:
     logging.warning("We assume ddbb is new, so we create all needed tables here.")
     # TODO: create all needed tables
 
+
 elif entries_in_table_version == 1:
     logging.info("One entry found in table `termgame_version`.")
     c.execute("SELECT `major`, `minor` FROM `termgame_version`;")
@@ -52,3 +53,4 @@ elif entries_in_table_version > 1:
 
 conn.close()
 is_ddbb_open = False
+is_user_logged = False
