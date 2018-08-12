@@ -25,3 +25,6 @@ class TestSession(unittest.TestCase):
         self.assertEqual(1, session.__session__)
         self.assertEqual(False, session.is_ddbb_open)
         self.assertEqual(False, session.is_user_logged)
+        # self.assertEqual(session.FAIL, session.login(user="no_exist",password="no_password"))
+        # self.assertEqual(session.SUCCESS, session.adduser(user="user01", password="the_password"))
+        # (result, session_id) = session.login(user="user01", md5password=)
